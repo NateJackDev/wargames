@@ -2,6 +2,7 @@
 
 # (Standard 2 clause BSD licence)
 # 
+# Copyright (c) 2018 Nathan Jackson <njackson7899@gmail.com>
 # Copyright (c) 2012 David Brownlee <abs@absd.org>
 # All rights reserved.
 # 
@@ -75,6 +76,7 @@ wopr -c 15 "									" \
      "									"
 }
 
+# Login Phase
 phase_logon()
 {
     prompt="LOGON:  "
@@ -88,7 +90,7 @@ phase_logon()
 	    ;;
 	*Joshua* | *joshua*)
 	    actual_d "Joshua"
-	    phase=falken
+	    phase=root
 	    return
 	    ;;
 	*"Help Games" | *"help games")
@@ -116,6 +118,44 @@ phase_logon()
 	    ;;
     esac
     wopr '' ''
+}
+
+phase_root()
+{
+	clear
+    wopr -c 0 -l 25 "\
+#45     11456          11009          11893          11972        11315
+PRT CON. 3.4.5.  SECTRAN 9.4.3.                      PORT STAT: SD-345
+
+(311) 699-7305
+"
+    clear
+    printf "\n\n\n\n\n\n\n"
+    wopr -c 0 -l 25 "\
+(311) 767-8739
+(311) 936-2364
+-           PRT. STAT.                                   CRT. DEF.
+||||||||||||||==================================================
+FSKDJLSD: SDSDKJ: SBFJSL:                           DKSJL: SKFJJ: SDKFJLJ:
+SYSPROC FUNCT READY                            ALT NET READY
+CPU AUTH RY-345-AX3            SYSCOMP STATUS  ALL PORTS ACTIVE
+22/34534.90/3209                                          11CVB-3904-3490
+(311) 935-2364
+"
+    clear
+    sleep 0.5
+    wopr "GREETINGS PROFESSOR FALKEN." ""
+    prompt=
+    a="$(readline)"
+
+    case "$a" in
+	"Continue" | "c")
+	    actual_d "CONTINUING..."
+	    phase=falken
+	    return
+	    ;;
+	esac
+	exit
 }
 
 phase_games()
@@ -165,29 +205,6 @@ GLOBAL THERMONUCLEAR WAR"
 
 phase_falken()
 {
-    clear
-    wopr -c 0 -l 25 "\
-#45     11456          11009          11893          11972        11315
-PRT CON. 3.4.5.  SECTRAN 9.4.3.                      PORT STAT: SD-345
-
-(311) 699-7305
-"
-    clear
-    printf "\n\n\n\n\n\n\n"
-    wopr -c 0 -l 25 "\
-(311) 767-8739
-(311) 936-2364
--           PRT. STAT.                                   CRT. DEF.
-||||||||||||||==================================================
-FSKDJLSD: SDSDKJ: SBFJSL:                           DKSJL: SKFJJ: SDKFJLJ:
-SYSPROC FUNCT READY                            ALT NET READY
-CPU AUTH RY-345-AX3            SYSCOMP STATUS  ALL PORTS ACTIVE
-22/34534.90/3209                                          11CVB-3904-3490
-(311) 935-2364
-"
-    clear
-    sleep 0.5
-    wopr "GREETINGS PROFESSOR FALKEN." ""
     prompt=
     while true ; do
 	a="$(readline)"
